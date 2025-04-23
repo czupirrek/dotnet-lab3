@@ -153,7 +153,7 @@ namespace dotnet_lab3_gui
 
             for (int i = 0; i < matrixSize; i++)
             {
-                dataGridView1.Columns[i].Width = 40; 
+                dataGridView1.Columns[i].Width = 40;
             }
 
             for (int row = 0; row < matrixSize; row++)
@@ -172,6 +172,66 @@ namespace dotnet_lab3_gui
             numericUpDown2.BackColor = Color.White;
             RNGSeedError = false;
             numericUpDown2.Value = RNGSeed;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            dataGridView1.ColumnCount = matrixSize;
+            dataGridView1.RowCount = matrixSize;
+            dataGridView1.RowHeadersVisible = false;
+
+            for (int i = 0; i < matrixSize; i++)
+            {
+                dataGridView1.Columns[i].Width = 40;
+            }
+
+            for (int row = 0; row < matrixSize; row++)
+            {
+                for (int col = 0; col < matrixSize; col++)
+                {
+                    dataGridView1.Rows[row].Cells[col].Value = matrixCalc.B[row, col];
+                }
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            dataGridView1.ColumnCount = matrixSize;
+            dataGridView1.RowCount = matrixSize;
+            dataGridView1.RowHeadersVisible = false;
+
+            for (int i = 0; i < matrixSize; i++)
+            {
+                dataGridView1.Columns[i].Width = 40;
+            }
+
+            for (int row = 0; row < matrixSize; row++)
+            {
+                for (int col = 0; col < matrixSize; col++)
+                {
+                    dataGridView1.Rows[row].Cells[col].Value = matrixCalc.A[row, col];
+                }
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            dataGridView1.ColumnCount = matrixSize;
+            dataGridView1.RowCount = matrixSize;
+            dataGridView1.RowHeadersVisible = false;
+
+            for (int i = 0; i < matrixSize; i++)
+            {
+                dataGridView1.Columns[i].Width = 40;
+            }
+
+            for (int row = 0; row < matrixSize; row++)
+            {
+                for (int col = 0; col < matrixSize; col++)
+                {
+                    dataGridView1.Rows[row].Cells[col].Value = matrixCalc.Result[row, col];
+                }
+            }
         }
     }
 }
