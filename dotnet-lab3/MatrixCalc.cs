@@ -12,6 +12,7 @@ namespace dotnet_lab3
         public int[,] A { get; set; }
         public int[,] B { get; set; }
         public int[,] Result { get; set; }
+        public int MatrixSize { get; set; }
         int NThreads = 1;
         int RngSeed = 0;
         Random rand;
@@ -19,6 +20,7 @@ namespace dotnet_lab3
         int MaxCellValue = 1000;
         public MatrixCalc(int NThreads, int MatrixSize)
         {
+            this.MatrixSize = MatrixSize;
             this.NThreads = NThreads;
             RngSeed = DateTime.Now.Millisecond;
             this.rand = new Random(RngSeed);
@@ -64,6 +66,51 @@ namespace dotnet_lab3
                 }
                 Console.WriteLine();
             }
+        }
+
+        public long MultiplyParallel()
+        {
+            ParallelOptions opt = new ParallelOptions() { MaxDegreeOfParallelism = NThreads };
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            Parallel.For(0, MatrixSize, opt, x =>
+                {
+                    for (int i = 0; i < MatrixSize; i++)
+                    {
+                        MultiplyCell(x, i);
+                    }
+                });
+                watch.Stop();
+                //Console.WriteLine($"{watch.ElapsedMilliseconds}");
+            return watch.ElapsedMilliseconds;
+        }
+
+        public void MultiplyThreadJob(int id)
+        {
+            for (int x = id; x < MatrixSize; x += NThreads)
+            {
+                for (int i = 0; i < MatrixSize; i++)
+                {
+                    MultiplyCell(x, i);
+                }
+            }
+
+        }
+
+
+        public long MultiplyThread()
+        {
+            Thread[] threads = new Thread[NThreads];
+            for (int i = 0; i < NThreads; i++)
+            {
+                int threadId = i; 
+                threads[i] = new Thread(() => MultiplyThreadJob(threadId));
+            }
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            foreach (Thread t in threads) t.Start();
+            foreach (Thread t in threads) t.Join();
+            watch.Stop();
+            return watch.ElapsedMilliseconds;
+
         }
 
 

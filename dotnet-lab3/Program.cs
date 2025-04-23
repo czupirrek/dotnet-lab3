@@ -1,53 +1,73 @@
-﻿namespace dotnet_lab3
+﻿using System.Drawing;
+
+namespace dotnet_lab3
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            int size = 500;
-            MatrixCalc matrixCalc = new MatrixCalc(4, size);
-            matrixCalc.SetRandomValues();
+            //int size = 500;
+            MatrixCalc matrixCalc;
+            var results = new List<(int threads, int size, long elapsedMs)>();
 
-            //Console.WriteLine("Matrix A:");
-            //matrixCalc.PrintMatrix(matrixCalc.A);
 
-            //Console.WriteLine("Matrix B:");
-            //matrixCalc.PrintMatrix(matrixCalc.B);
-
-            //for (int i = 0; i < size; i++)
+            //for (int sz = 200; sz < 1000; sz+=100)
             //{
-            //    for (int j = 0; j < size; j++)
+            //    for (int threads = 1; threads <= 14; threads += 2)
             //    {
-            //        Console.WriteLine($"{i} {j} calc");
-            //        matrixCalc.MultiplyCell(i, j);
+            //        for (int run = 0; run < 15; run++)
+            //        {
+            //            matrixCalc = new MatrixCalc(threads, sz);
+            //            matrixCalc.SetRandomValues();
+            //            var watch = System.Diagnostics.Stopwatch.StartNew();
+            //            var ElapsedMs = matrixCalc.MultiplyParallel();
+            //            watch.Stop();
+            //            //Console.WriteLine($"run {run} took {watch.ElapsedMilliseconds} ms.");
+            //            Console.WriteLine($"{threads} {sz} {ElapsedMs}");
+            //            results.Add((threads, sz, ElapsedMs));
+
+            //        }
+            //    }
+            //    using (var writer = new StreamWriter($"results_{sz}.csv"))
+            //    {
+            //        writer.WriteLine("threads,size,elapsedMs");
+            //        foreach (var result in results)
+            //        {
+            //            writer.WriteLine($"{result.threads},{result.size},{result.elapsedMs}");
+            //        }
             //    }
             //}
 
 
-
-            for (int run = 0; run < 15; run++)
+            for (int sz = 200; sz < 800; sz += 100)
             {
-                matrixCalc = new MatrixCalc(4, size);
-
-                matrixCalc.SetRandomValues();
-
-                ParallelOptions opt = new ParallelOptions() { MaxDegreeOfParallelism = 16 };
-                int[] ThreadsUsed = new int[30];
-                var watch = System.Diagnostics.Stopwatch.StartNew();
-                Parallel.For(0, size, opt, x =>
+                for (int threads = 1; threads <= 14; threads += 2)
                 {
-                    for (int i = 0; i < size; i++)
+                    for (int run = 0; run < 15; run++)
                     {
-                        matrixCalc.MultiplyCell(x, i);
+                        matrixCalc = new MatrixCalc(threads, sz);
+                        matrixCalc.SetRandomValues();
+                        var watch = System.Diagnostics.Stopwatch.StartNew();
+                        var ElapsedMs = matrixCalc.MultiplyThread();
+                        watch.Stop();
+                        //Console.WriteLine($"run {run} took {watch.ElapsedMilliseconds} ms.");
+                        Console.WriteLine($"{threads} {sz} {ElapsedMs}");
+                        results.Add((threads, sz, ElapsedMs));
+
                     }
-                    ThreadsUsed[Thread.CurrentThread.ManagedThreadId]++;
-                });
-                watch.Stop();
-                //Console.WriteLine($"run {run} took {watch.ElapsedMilliseconds} ms.");
-                Console.WriteLine($"{watch.ElapsedMilliseconds}");
-
-
+                }
+                using (var writer = new StreamWriter($"results_{sz}.csv"))
+                {
+                    writer.WriteLine("threads,size,elapsedMs");
+                    foreach (var result in results)
+                    {
+                        writer.WriteLine($"{result.threads},{result.size},{result.elapsedMs}");
+                    }
+                }
             }
+
+
+
 
 
             //matrixCalc.PrintMatrix(matrixCalc.Result);
