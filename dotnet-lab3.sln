@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-lab3", "dotnet-lab3\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-lab3-gui", "dotnet-lab3-gui\dotnet-lab3-gui.csproj", "{DABDABF8-3699-4A58-AAFE-FCE5395A6537}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-lab3-tests", "dotnet-lab3-tests\dotnet-lab3-tests.csproj", "{6FF637A2-3B9E-4B0B-9167-E3305E182F7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DABDABF8-3699-4A58-AAFE-FCE5395A6537}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DABDABF8-3699-4A58-AAFE-FCE5395A6537}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DABDABF8-3699-4A58-AAFE-FCE5395A6537}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FF637A2-3B9E-4B0B-9167-E3305E182F7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FF637A2-3B9E-4B0B-9167-E3305E182F7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FF637A2-3B9E-4B0B-9167-E3305E182F7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FF637A2-3B9E-4B0B-9167-E3305E182F7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

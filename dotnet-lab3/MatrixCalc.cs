@@ -18,12 +18,13 @@ namespace dotnet_lab3
         Random rand;
         int MinCellValue = 0;
         int MaxCellValue = 1000;
-        public MatrixCalc(int NThreads, int MatrixSize)
+        public MatrixCalc(int NThreads, int MatrixSize, int RngSeed)
         {
             this.MatrixSize = MatrixSize;
             this.NThreads = NThreads;
+            this.RngSeed = RngSeed;
             RngSeed = DateTime.Now.Millisecond;
-            this.rand = new Random(RngSeed);
+            this.rand = new Random(this.RngSeed);
 
             A = new int[MatrixSize, MatrixSize];
             B = new int[MatrixSize, MatrixSize];

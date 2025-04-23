@@ -9,4 +9,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\dotnet-lab3\dotnet-lab3.csproj" />
+  </ItemGroup>
+
 </Project>
